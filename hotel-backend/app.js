@@ -1,19 +1,19 @@
-// const path = require("path");
+const path = require("path");
 const express = require("express");
-// const mongoose = require("mongoose");
-const dontenv = require("dotenv");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 const morgan = require("morgan");
 // const passport = require("passport");
 // const session = require("express-session");
 // const MongoStore = require("connect-mongo")(session);
-// const connectDB = require("./config/db");
+const connectDB = require("./config/db");
 // const cookieParser = require("cookie-parser");
 
-dontenv.config({ path: "./config/config.env" });
+dotenv.config({ path: "./config/config.env" });
 // require("./config/passport")(passport); // Passport config
 const PORT = process.env.PORT || 3000;
 
-// connectDB();
+connectDB();
 const app = express();
 
 app.options("*", function (req, res, next) {
