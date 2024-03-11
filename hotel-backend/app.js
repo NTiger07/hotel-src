@@ -3,14 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
-// const passport = require("passport");
-// const session = require("express-session");
-// const MongoStore = require("connect-mongo")(session);
 const connectDB = require("./config/db");
-// const cookieParser = require("cookie-parser");
 
 dotenv.config({ path: "./config/config.env" });
-// require("./config/passport")(passport); // Passport config
 const PORT = process.env.PORT || 3000;
 
 connectDB();
@@ -42,6 +37,7 @@ if (process.env.NODE_ENV == "development") {
 // Routes
 app.use("/", require("./routes/index"))
 app.use("/rooms", require("./routes/rooms"))
+app.use("/bookings", require("./routes/bookings"))
 
 app.listen(
   PORT,
