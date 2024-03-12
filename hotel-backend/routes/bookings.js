@@ -24,4 +24,36 @@ router.post("/add", async (req, res) => {
   }
 });
 
+
+// @desc     Get all Bookings
+// @route    GET  "/bookings/all"
+
+router.get("/all", async (req, res) => {
+  try {
+    const bookings = await Booking.find()
+    res.send(bookings);
+    res.status(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+});
+
+
+// @desc     Get Booking history
+// @route    GET  "/bookings/:room_number"
+
+router.get("/:room_number", async (req, res) => {
+  try {
+    const bookings = await Booking.find({
+      room_number: req.params.room_number
+    })
+    res.send(bookings);
+    res.status(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+});
+
 module.exports = router;
