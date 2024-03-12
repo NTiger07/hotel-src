@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Booking = require("../models/Booking");
 const Room = require("../models/Room");
-const { truncate } = require("fs-extra");
 
 // @desc     Add Booking
 // @route    POST  "/bookings/add"
@@ -14,7 +13,7 @@ router.post("/add", async (req, res) => {
       {
         roomNumber: req.body.room_number,
       },
-      { availability: false },
+      { status: "booked" },
       { new: true, runValidators: true }
     );
     res.send("Booking Added");
@@ -25,13 +24,12 @@ router.post("/add", async (req, res) => {
   }
 });
 
-
 // @desc     Get all Bookings
 // @route    GET  "/bookings/all"
 
 router.get("/all", async (req, res) => {
   try {
-    const bookings = await Booking.find()
+    const bookings = await Booking.find();
     res.send(bookings);
     res.status(200);
   } catch (error) {
@@ -39,7 +37,6 @@ router.get("/all", async (req, res) => {
     res.status(500);
   }
 });
-
 
 // @desc     Get Booking history
 // @route    GET  "/bookings/:room_number"
@@ -47,8 +44,8 @@ router.get("/all", async (req, res) => {
 router.get("/:room_number", async (req, res) => {
   try {
     const bookings = await Booking.find({
-      room_number: req.params.room_number
-    })
+      room_number: req.params.room_number,
+    });
     res.send(bookings);
     res.status(200);
   } catch (error) {
@@ -57,22 +54,22 @@ router.get("/:room_number", async (req, res) => {
   }
 });
 
-
-
-
-// @desc     Cnacel Booking
+// @desc     Cancel Booking
 // @route    POST  "/bookings/cancel"
 
-router.post("/cancel/:room_number", async (req, res) => {
+router.post("/cancel/:booking_id", async (req, res) => {
   try {
-    await Booking.findOneAndDelete({
-      room_number: req.params.room_number
-    })
+    await Booking.findOneAndUpdate(
+      {
+        room_number: req.params.room_number,
+      },
+      { status: "cancelled" }
+    );
     await Room.findOneAndUpdate(
       {
         roomNumber: req.body.room_number,
       },
-      { availability: true },
+      { status: "available" },
       { new: true, runValidators: true }
     );
     res.send("Booking Cancelled");

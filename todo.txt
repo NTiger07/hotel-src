@@ -1,1 +1,1 @@
-pick the most recent booking
+get specific info of a booking

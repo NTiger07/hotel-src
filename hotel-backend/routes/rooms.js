@@ -17,4 +17,36 @@ router.post("/add",  async (req, res) => {
   }
 });
 
+
+
+// @desc     Get all rooms
+// @route    GET  "/rooms/all"
+
+router.get("/all",  async (req, res) => {
+  try {
+    const rooms = await Room.find();
+    res.send(rooms)
+    res.status(200)
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+});
+
+
+
+// @desc     Get number of rooms
+// @route    GET  "/rooms/meta"
+
+router.get("/meta",  async (req, res) => {
+  try {
+    const rooms = await Room.find();
+    res.send(rooms.length)
+    res.status(200)
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+});
+
 module.exports = router
