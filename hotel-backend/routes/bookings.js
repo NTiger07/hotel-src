@@ -3,6 +3,53 @@ const router = express.Router();
 const Booking = require("../models/Booking");
 const Room = require("../models/Room");
 
+async function updateRoomAvailability() {
+  try {
+    const currentTime = new Date();
+
+    const activeBookings = await Booking.find({
+      checkInDate: { $lte: currentTime },
+      checkOutDate: { $gte: currentTime },
+    });
+
+    for (const booking of activeBookings) {
+      await Booking.findOneAndUpdate(
+        {
+          _id: booking._id,
+        },
+        { status: "in-progress" }
+      );
+      await Room.findOneAndUpdate(
+        { roomNumber: booking.room_number },
+        { status: "occupied" }
+      );
+      console.log("Updated booking " + booking._id);
+    }
+
+    const endedBookings = await Booking.find({
+      checkOutDate: { $lt: currentTime },
+    });
+
+    for (const booking of endedBookings) {
+      await Booking.findOneAndUpdate(
+        {
+          _id: booking._id,
+        },
+        { status: "completed" }
+      );
+      await Room.findOneAndUpdate(
+        { roomNumber: booking.room_number },
+        { status: "available" }
+      );
+      console.log("Updated booking " + booking._id);
+    }
+  } catch (error) {
+    console.error("Error updating room availability:", error);
+  }
+}
+
+setInterval(updateRoomAvailability, 60000);
+
 // @desc     Add Booking
 // @route    POST  "/bookings/add"
 
