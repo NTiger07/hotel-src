@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Booking = require("../models/Booking");
 const Room = require("../models/Room");
+const { truncate } = require("fs-extra");
 
 // @desc     Add Booking
 // @route    POST  "/bookings/add"
@@ -49,6 +50,32 @@ router.get("/:room_number", async (req, res) => {
       room_number: req.params.room_number
     })
     res.send(bookings);
+    res.status(200);
+  } catch (error) {
+    console.error(error);
+    res.status(500);
+  }
+});
+
+
+
+
+// @desc     Cnacel Booking
+// @route    POST  "/bookings/cancel"
+
+router.post("/cancel/:room_number", async (req, res) => {
+  try {
+    await Booking.findOneAndDelete({
+      room_number: req.params.room_number
+    })
+    await Room.findOneAndUpdate(
+      {
+        roomNumber: req.body.room_number,
+      },
+      { availability: true },
+      { new: true, runValidators: true }
+    );
+    res.send("Booking Cancelled");
     res.status(200);
   } catch (error) {
     console.error(error);
