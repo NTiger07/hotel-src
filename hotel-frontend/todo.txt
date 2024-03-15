@@ -6,3 +6,4 @@ sort in terms of date(closest first) for bookings
 booking status color based on status
 
 room details frontend maybe
+add checkin and out date to booking filter

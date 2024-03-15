@@ -1,6 +1,6 @@
 const RoomItem = () => {
     return (
-        <div className="flex flex-col cursor-pointer rounded-xl shadow-md bg-white w-[280px] h-max">
+        <div className="flex flex-col rounded-xl shadow-md bg-white w-[280px] h-max">
             <div className="w-full h-[50%]">
                 <img src="/assets/room.jpg" className="rounded-t-xl w-[280px]" alt="" />
             </div>
@@ -19,12 +19,14 @@ const RoomItem = () => {
                     beautiful...
                 </p>
                 <button
-                    className="cursor-pointer [border:none] py-[.8rem] w-[100%] bg-primary-red rounded-3xs flex justify-center"
+                    className="cursor-default [border:none] py-[.8rem] w-[100%] bg-primary-red rounded-3xs flex justify-center"
                 >
                     <b className="relative text-[1.2rem] text-whites-plain">
                         Booked
                     </b>
                 </button>
+                <span className="text-[.9rem] text-primary-red mt-[1rem] w-full cursor-pointer hover:underline">View details...</span>
+                <span className="text-[.9rem] text-primary-red mt-[1rem] w-full cursor-pointer hover:underline">View booking history...</span>
             </div>
         </div>
     )
