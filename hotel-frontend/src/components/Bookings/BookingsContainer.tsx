@@ -48,30 +48,30 @@ const BookingsContainer = () => {
         <span className="w-[15.5%]">Status</span>
       </div>
       <div className="flex flex-col">
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
-        <BookingItem id={1}/>
-        <BookingItem id={2}/>
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
       </div>
     </div>
   )

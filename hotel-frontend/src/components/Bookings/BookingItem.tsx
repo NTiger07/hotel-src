@@ -1,10 +1,18 @@
 import { useMemo } from "react";
 
 type BookingProps = {
-    id: number
+    id: number,
+    room_number: number,
+    room_name: string,
+    room_type: string,
+    client: string,
+    checkin: string,
+    checkout: string,
+    status: string
+
 }
 const BookingItem = (props: BookingProps) => {
-    const { id } = props
+    const { id, room_number, room_name, room_type, client, checkin, checkout, status } = props
     const setBackdropStyle = useMemo(() => {
         if (id % 2 == 0) {
             return { backgroundColor: "#f9f9f9" };
@@ -16,15 +24,15 @@ const BookingItem = (props: BookingProps) => {
     return (
         <div className="w-full flex items-center py-[1.3%] px-[3%]" style={setBackdropStyle}>
 
-            <span className="w-[25%] text-[1.1rem]">Olaleru Favour</span>
-            <span className="w-[12%]">Room 1</span>
+            <span className="w-[25%] text-[1.1rem]">{client}</span>
+            <span className="w-[12%]">Room {room_number}</span>
             <div className="w-[15.5%] flex flex-col">
-                <span>Deluxe Suite</span>
-                <span className="text-[.9rem] text-greys-etherium">Luxury room</span>
+                <span>{room_name}</span>
+                <span className="text-[.9rem] text-greys-etherium">{room_type[0].toUpperCase() + room_type.substring(1)} room</span>
             </div>
-            <span className="w-[17%]">21st February, 2024</span>
-            <span className="w-[17%]">14th March, 2024</span>
-            <span className="w-[15.5%]">Completed</span>
+            <span className="w-[17%]">{checkin}</span>
+            <span className="w-[17%]">{checkout}</span>
+            <span className="w-[15.5%]">{status[0].toUpperCase() + status.substring(1)}</span>
             <div className="relative w-[2.5%] flex justify-center cursor-pointer">
                 <img
                     src="/icons/double-arrow.svg"
