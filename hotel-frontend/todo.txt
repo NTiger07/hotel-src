@@ -1,1 +1,6 @@
 filter by room status enum: color of button based on status
+click on a room to see details and booking history(show booking history)
+add room floating button and dialog
+filter panel for both room and bookings
+sort in terms of date(closest first) for bookings
+booking status color based on status
