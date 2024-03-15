@@ -4,3 +4,5 @@ add room floating button and dialog
 filter panel for both room and bookings
 sort in terms of date(closest first) for bookings
 booking status color based on status
+
+room details frontend maybe

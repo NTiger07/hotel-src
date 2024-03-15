@@ -2,8 +2,9 @@ import BookingItem from "./BookingItem"
 
 const BookingsContainer = () => {
   return (
-    <div>BookingsContainer
-      <div>HEADER</div>
+    <div className="pt-[2rem]">
+      <span className="text-primary-red font-bold text-[3rem]">Bookings</span>
+      <div>FILTER</div>
       <div className="flex flex-col">
         <BookingItem id={1}/>
         <BookingItem id={2}/>

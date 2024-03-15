@@ -28,7 +28,7 @@ const BookingItem = (props: BookingProps) => {
             <span className="w-[20%]">Completed</span>
             <div className="relative w-[2.5%] flex justify-center cursor-pointer">
                 <img
-                    src="/icons/double-arrow-black.svg"
+                    src="/icons/double-arrow.svg"
                     className="w-[22px] h-[20px]"
                     alt=""
                 />
