@@ -1,0 +1,1 @@
+filter by room status enum: color of button based on status

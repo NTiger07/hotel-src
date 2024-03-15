@@ -9,12 +9,12 @@ import Bookings from './pages/Bookings'
 function App() {
 
   return (
-    <div className='relative overflow-hidden h-[100vh] font-lexend'>
+    <div className='relative h-[100vh] font-lexend'>
       <div className='absolute'>
         <ToastContainer position='top-center' />
       </div>
       <Header />
-      <div className="w-[100%] overflow-x-hidden bg-[#b1aaaace]">
+      <div className="w-[100%] overflow-x-hidden px-[3%]">
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/rooms' element={<Rooms />} />
