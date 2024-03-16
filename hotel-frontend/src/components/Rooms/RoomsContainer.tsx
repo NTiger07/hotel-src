@@ -3,7 +3,7 @@ import RoomItem from "./RoomItem"
 import AddRoom from "./AddRoom"
 
 const RoomsContainer = () => {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
   const [searchValue, setSearchValue] = useState("")
   const [roomType, setRoomType] = useState("")
 
