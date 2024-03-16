@@ -1,1 +1,3 @@
-delete room
+delete room route
+i am removing room name from booking because it it arbitrary and not connected to anything in the db
+i'll make it not required for now

@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const BookingSchema = new mongoose.Schema({
-  customer_name: { type: String, required: true },
+  client_name: { type: String, required: true },
   room_number: { type: Number, required: true, unique: true },
-  room_name: { type: String, required: true },
+  room_name: { type: String, required: false },
   room_type: {
     type: String,
-    enum: ["basic", "luxury", "suite"],
+    enum: ["basic", "luxury", "family", "suite"],
   },
   checkInDate: { type: Date, required: true },
   checkOutDate: { type: Date, required: true },
@@ -14,7 +14,8 @@ const BookingSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ["completed", "in-progress", "cancelled"],
+    enum: ["pending", "completed", "in-progress", "cancelled"],
+    default: "pending"
   },
 });
 

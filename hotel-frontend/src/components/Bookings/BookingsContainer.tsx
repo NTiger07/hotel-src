@@ -1,16 +1,18 @@
 import { useState } from "react"
 import BookingItem from "./BookingItem"
+import AddBooking from "./AddBooking"
 
 const BookingsContainer = () => {
+  const [isVisible, setIsVisible] = useState(false)
   const [clientName, setClientName] = useState("")
   const [status, setStatus] = useState("")
   const [roomType, setRoomType] = useState("")
 
   return (
-    <div className="pt-[2rem]">
+    <div className="relative pt-[2rem]">
+      {isVisible ? <AddBooking /> : null}
+
       <span className="text-primary-red font-bold text-[3rem]">Bookings</span>
-
-
 
       <div className="FILTERADD flex items-center justify-between py-[3rem]">
 
@@ -42,7 +44,7 @@ const BookingsContainer = () => {
         </div>
 
 
-        <div className="ADD bg-primary-red rounded-lg flex py-[.6rem] px-[2rem] justify-between cursor-pointer">
+        <div className="ADD bg-primary-red rounded-lg flex py-[.6rem] px-[2rem] justify-between cursor-pointer" onClick={() => { setIsVisible(!isVisible) }}>
           <a className="[text-decoration:none] w-fit flex flex-row items-center justify-start gap-[4px]">
             <img className="relative w-6 h-6" alt="" src="/icons/add.svg" />
             <div className="relative font-semibold text-white">Add Booking</div>

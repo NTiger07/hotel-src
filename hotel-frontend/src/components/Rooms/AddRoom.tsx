@@ -44,17 +44,6 @@ const AddRoom = (props: any) => {
                 </button>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
         </div>
     )
 }
