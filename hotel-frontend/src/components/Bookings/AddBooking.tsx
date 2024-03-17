@@ -1,6 +1,9 @@
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+
 const AddBooking = () => {
     return (
-        <div className="w-[50vw] p-[3rem] h-[50vh] absolute gap-3 z-50 bg-white rounded-lg shadow-lg flex flex-col items-center justify-between text-light-black font-medium">
+        <div className="w-[50vw] p-[3rem] h-[65vh] absolute gap-3 z-50 bg-white rounded-lg shadow-lg flex flex-col items-center justify-between text-light-black font-medium">
 
             <div className="NAME flex items-center w-full justify-between">
                 <span>Client name</span>
@@ -37,51 +40,34 @@ const AddBooking = () => {
 
             <div className="CHECKIN w-full flex items-center justify-between">
                 <span>Check-In Date</span>
-                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             disablePast
                             label="Check-In Date"
-                            value={dayjs(newItem.expiryDate)}
-                            onChange={handleExpiryDateChange}
+                            // value={dayjs(newItem.expiryDate)}
+                            // onChange={handleExpiryDateChange}
                             format="DD-MM-YYYY"
                         />
-                    </LocalizationProvider> */}
+                    </LocalizationProvider>
             </div>
 
 
             <div className="CHECKOUT w-full flex items-center justify-between">
                 <span>Check-Out Date</span>
-                {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             disablePast
                             label="Check-Out Date"
-                            value={dayjs(newItem.expiryDate)}
-                            onChange={handleExpiryDateChange}
+                            // value={dayjs(newItem.expiryDate)}
+                            // onChange={handleExpiryDateChange}
                             format="DD-MM-YYYY"
                         />
-                    </LocalizationProvider> */}
+                    </LocalizationProvider>
 
 
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <div className="w-[20%] ml-[.7rem] flex justify-center items-center">
+            <div className="w-[20%] ml-[.7rem] flex justify-center items-center mt-[2rem]">
                 <button
                     className="cursor-pointer bg-[transparent] h-[3rem] w-[100%] rounded-3xs flex flex-row items-center justify-center border-[1px] border-solid border-primary-red"
                 >
@@ -91,17 +77,6 @@ const AddBooking = () => {
                     </b>
                 </button>
             </div>
-
-
-
-
-
-
-
-
-
-
-
 
         </div>
     )

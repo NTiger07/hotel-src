@@ -1,5 +1,3 @@
 sort in terms of date(closest first) for bookings
 room details frontend maybe
 toastify for actions
-
-@mui/x-date-pickers
