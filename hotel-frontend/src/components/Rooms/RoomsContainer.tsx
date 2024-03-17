@@ -1,15 +1,38 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import RoomItem from "./RoomItem"
 import AddRoom from "./AddRoom"
-
+import axios from "axios"
+type RoomType = {
+      roomNumber: number,
+      room_name: string,
+      room_type: string,
+      price: number,
+      status: string,
+}
 const RoomsContainer = () => {
   const [isVisible, setIsVisible] = useState(false)
   const [searchValue, setSearchValue] = useState("")
   const [roomType, setRoomType] = useState("")
 
+  useEffect(() => {
+    getRooms()
+  }, [])
+
+  const [rooms, setRooms] = useState<RoomType>([])
+
+  const getRooms = () => {
+    axios
+      .get(`${import.meta.env.VITE_LOCAL_URL}rooms/all`)
+      .then((res) => {
+        setRooms(res.data)
+      })
+      .catch((err) => { console.error(err) })
+  }
+
+
   return (
     <div className="relative pt-[2rem]">
-      {isVisible ? <AddRoom setIsVisible={setIsVisible} /> : null}
+      {isVisible ? <AddRoom setIsVisible={setIsVisible} getRooms={getRooms} /> : null}
 
       <span className="text-primary-red font-bold text-[3rem]">Rooms</span>
 
@@ -47,38 +70,13 @@ const RoomsContainer = () => {
 
 
 
-
+      
+ 
+      
       <div className="grid grid-cols-4 gap-y-[3rem] pb-[2rem] gap-x-3">
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
-        <RoomItem />
+        {rooms.map((room) => (
+          <RoomItem room_number={room.roomNumber} room_name={room.room_name} price={room.price} room_type={room.room_type} status={room.status} />
+        ))}
       </div>
     </div>
   )

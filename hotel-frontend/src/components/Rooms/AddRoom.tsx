@@ -3,14 +3,12 @@ import { useState } from "react"
 import { toast } from "react-toastify"
 
 const AddRoom = (props: any) => {
-
-    const { setIsVisible } = props
+    const { setIsVisible, getRooms } = props
     const [newRoom, setNewRoom] = useState({
         name: "",
         type: "",
         price: 0,
     })
-
 
     const newRoomObject = {
         room_name: newRoom.name,
@@ -24,7 +22,7 @@ const AddRoom = (props: any) => {
             .then(() => {
                 toast.info("New Room Added")
                 setIsVisible(false)
-                // getRooms()
+                getRooms()
             })
             .catch((err) => {
                 console.error(err)

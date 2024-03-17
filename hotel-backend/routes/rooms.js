@@ -21,18 +21,18 @@ router.post("/add", async (req, res) => {
 // @desc     Delete Room
 // @route    POST  "/rooms/add"
 
-router.post("/delete/:room_number", async (req, res) => {
-  try {
-    await Room.findOneAndDelete({
-      room_number: req.params.room_number,
-    });
-    res.send("Room Deleted");
-    res.status(200);
-  } catch (error) {
-    console.error(error);
-    res.status(500);
-  }
-});
+// router.post("/delete/:room_number", async (req, res) => {
+//   try {
+//     await Room.findOneAndDelete({
+//       room_number: req.params.room_number,
+//     });
+//     res.send("Room Deleted");
+//     res.status(200);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500);
+//   }
+// });
 
 // @desc     Get all rooms
 // @route    GET  "/rooms/all"
