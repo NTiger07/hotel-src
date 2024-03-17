@@ -22,17 +22,13 @@ const AddRoom = (props: any) => {
         axios
             .post(`${import.meta.env.VITE_LOCAL_URL}rooms/add`, newRoomObject)
             .then(() => {
-                // toast.info("New Room Added")
-                // setIsVisible(false)
+                toast.info("New Room Added")
+                setIsVisible(false)
                 // getRooms()
-                console.log("Oya")
             })
             .catch((err) => {
                 console.error(err)
             })
-
-        // toast.info("New Room Added")
-        // setIsVisible(false)
     }
 
 
