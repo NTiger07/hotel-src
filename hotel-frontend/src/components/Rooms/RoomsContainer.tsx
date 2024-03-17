@@ -9,7 +9,7 @@ const RoomsContainer = () => {
 
   return (
     <div className="relative pt-[2rem]">
-      {isVisible ? <AddRoom /> : null}
+      {isVisible ? <AddRoom setIsVisible={setIsVisible} /> : null}
 
       <span className="text-primary-red font-bold text-[3rem]">Rooms</span>
 

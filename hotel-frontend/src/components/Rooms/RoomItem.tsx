@@ -25,7 +25,7 @@ const RoomItem = () => {
                         Booked
                     </b>
                 </button>
-                <span className="text-[.9rem] text-primary-red mt-[1rem] w-full cursor-pointer hover:underline">View details...</span>
+                {/* <span className="text-[.9rem] text-primary-red mt-[1rem] w-full cursor-pointer hover:underline">View details...</span> */}
                 <span className="text-[.9rem] text-primary-red mt-[1rem] w-full cursor-pointer hover:underline">View booking history...</span>
             </div>
         </div>

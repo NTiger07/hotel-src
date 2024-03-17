@@ -7,7 +7,9 @@ const Room = require("../models/Room");
 
 router.post("/add", async (req, res) => {
   try {
-    await Room.create(req.body);
+    const roomLength = await Room.find();
+    const newRoomData = { ...req.body, roomNumber: roomLength.length + 1 };
+    await Room.create(newRoomData);
     res.send("Room Added");
     res.status(200);
   } catch (error) {
