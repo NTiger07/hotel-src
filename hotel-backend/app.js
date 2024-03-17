@@ -2,6 +2,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
+const cors = require("cors");
+
+
 
 dotenv.config({ path: "./config/config.env" });
 const PORT = process.env.PORT || 3000;
@@ -13,18 +16,14 @@ const app = express();
 app.use(express.urlencoded({ extended: false}));
 app.use(express.json())
 
-app.options("*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Headers", [
-    "X-Requested-With",
-    "content-type",
-    "credentials",
-  ]);
-  res.header("Access-Control-Allow-Methods", "GET,POST");
-  res.status(200);
-  next();
-});
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+    methods: ["GET", "POST"],
+    allowedHeaders: ["X-Requested-With", "Content-Type", "Credentials"],
+  })
+);
 
 
 if (process.env.NODE_ENV == "development") {

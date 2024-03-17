@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 
 const AddRoom = (props: any) => {
 
-    const { setIsVisible} = props
+    const { setIsVisible } = props
     const [newRoom, setNewRoom] = useState({
         name: "",
         type: "",
@@ -17,19 +17,22 @@ const AddRoom = (props: any) => {
         price: newRoom.price,
         room_type: newRoom.type
     }
-    
+
     const addRoom = () => {
         axios
             .post(`${import.meta.env.VITE_LOCAL_URL}rooms/add`, newRoomObject)
             .then(() => {
-                toast.info("New Room Added")
-                setIsVisible(false)
+                // toast.info("New Room Added")
+                // setIsVisible(false)
                 // getRooms()
+                console.log("Oya")
             })
             .catch((err) => {
                 console.error(err)
             })
 
+        // toast.info("New Room Added")
+        // setIsVisible(false)
     }
 
 
@@ -65,7 +68,7 @@ const AddRoom = (props: any) => {
                 <input
                     className="outline-none w-[20%] bg-whites-plain rounded-6xs box-border flex flex-row py-[2%] pr-0 pl-[6%] items-start justify-start border-[1px] border-solid border-greys-etherium"
                     type="number"
-                    onChange={(e) => setNewRoom({ ...newRoom, price: Number(e.target.value)})}
+                    onChange={(e) => setNewRoom({ ...newRoom, price: Number(e.target.value) })}
                     placeholder="Price"
                     required
                 />
