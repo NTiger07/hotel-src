@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const BookingSchema = new mongoose.Schema({
   client_name: { type: String, required: true },
-  room_number: { type: Number, required: true, unique: false },
+  room_number: { type: Number, required: true },
   checkInDate: { type: String, required: true },
   checkOutDate: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },

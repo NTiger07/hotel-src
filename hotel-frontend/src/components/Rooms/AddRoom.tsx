@@ -6,7 +6,7 @@ const AddRoom = (props: any) => {
     const { setIsVisible, getRooms } = props
     const [newRoom, setNewRoom] = useState({
         name: "",
-        type: "",
+        type: "basic",
         price: 0,
     })
 

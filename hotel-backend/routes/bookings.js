@@ -3,62 +3,13 @@ const router = express.Router();
 const Booking = require("../models/Booking");
 const Room = require("../models/Room");
 
-// async function updateRoomAvailability() {
-//   try {
-//     const currentTime = new Date();
-
-//     const activeBookings = await Booking.find({
-//       checkInDate: { $lte: currentTime },
-//       checkOutDate: { $gte: currentTime },
-//     });
-
-//     for (const booking of activeBookings) {
-//       await Booking.findOneAndUpdate(
-//         {
-//           _id: booking._id,
-//         },
-//         { status: "in-progress" }
-//       );
-//       await Room.findOneAndUpdate(
-//         { roomNumber: booking.room_number },
-//         { status: "occupied" }
-//       );
-//       console.log("Updated booking " + booking._id);
-//     }
-
-//     const endedBookings = await Booking.find({
-//       checkOutDate: { $lt: currentTime },
-//     });
-
-//     for (const booking of endedBookings) {
-//       await Booking.findOneAndUpdate(
-//         {
-//           _id: booking._id,
-//         },
-//         { status: "completed" }
-//       );
-//       await Room.findOneAndUpdate(
-//         { roomNumber: booking.room_number },
-//         { status: "available" }
-//       );
-//       console.log("Updated booking " + booking._id);
-//     }
-//   } catch (error) {
-//     console.error("Error updating room availability:", error);
-//   }
-// }
-
-// setInterval(updateRoomAvailability, 60000);
-
-// @desc     Add Booking
-// @route    POST  "/bookings/add"
 
 router.post("/add", async (req, res) => {
   try {
     await Booking.create(req.body);
     await Room.findOneAndUpdate(
       {
-        roomNumber: req.body.room_number,
+        room_number: req.body.room_number,
       },
       { status: "booked" },
       { new: true, runValidators: true }
@@ -76,10 +27,10 @@ router.post("/add", async (req, res) => {
 
 router.get("/all", async (req, res) => {
   try {
-    const bookings = await Booking.find().sort({createdAt: "asc"});
+    const bookings = await Booking.find().sort({createdAt: "desc"});
     const bookingsWithRooms = [];
     for (const booking of bookings) {
-      const room = await Room.findOne({ roomNumber: booking.room_number });
+      const room = await Room.findOne({ room_number: booking.room_number });
       if (room) {
         bookingsWithRooms.push({ booking, room });
       }
@@ -102,7 +53,7 @@ router.get("/:room_number", async (req, res) => {
     });
     const bookingsWithRooms = [];
     for (const booking of bookings) {
-      const room = await Room.findOne({ roomNumber: booking.room_number });
+      const room = await Room.findOne({ room_number: booking.room_number });
       if (room) {
         bookingsWithRooms.push({ booking, room });
       }
@@ -128,7 +79,7 @@ router.post("/cancel/:booking_id", async (req, res) => {
     );
     await Room.findOneAndUpdate(
       {
-        roomNumber: req.body.room_number,
+        room_number: req.body.room_number,
       },
       { status: "available" },
       { new: true, runValidators: true }

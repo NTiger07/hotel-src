@@ -4,7 +4,7 @@ import AddRoom from "./AddRoom"
 import axios from "axios"
 type RoomType = {
   map(arg0: (room: RoomType) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode
-  roomNumber: number,
+  room_number: number,
   room_name: string,
   room_type: string,
   price: number,
@@ -42,7 +42,7 @@ const RoomsContainer = () => {
 
 
   return (
-    <div className="relative pt-[2rem]">
+    <div className="relative pt-[2rem] min-h-[70vh]">
       {isVisible ? <AddRoom setIsVisible={setIsVisible} getRooms={getRooms} /> : null}
 
       <span className="text-primary-red font-bold text-[3rem]">Rooms</span>
@@ -86,7 +86,7 @@ const RoomsContainer = () => {
 
       <div className="grid grid-cols-4 gap-y-[3rem] pb-[2rem] gap-x-3">
         {rooms?.map((room: RoomType) => (
-          <RoomItem room_number={room.roomNumber} room_name={room.room_name} price={room.price} room_type={room.room_type} status={room.status} />
+          <RoomItem room_number={room.room_number} room_name={room.room_name} price={room.price} room_type={room.room_type} status={room.status} />
         ))}
       </div>
     </div>

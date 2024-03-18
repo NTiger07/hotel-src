@@ -38,7 +38,7 @@ const RoomHistoryContainer = (props: any) => {
           </div>
           <div className="flex flex-col">
           {bookingHistory?.map((booking: any, index) => (
-            <BookingItem id={index + 1} room_number={booking.room.roomNumber} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} />
+            <BookingItem id={index + 1} room_number={booking.room.room_number} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} />
           ))}
         </div>
         </div>
