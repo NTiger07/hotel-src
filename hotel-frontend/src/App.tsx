@@ -5,6 +5,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Rooms from './pages/Rooms'
 import Bookings from './pages/Bookings'
+import RoomHistory from './pages/RoomHistory'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/rooms' element={<Rooms />} />
           <Route path='/bookings' element={<Bookings />} />
+          <Route path='/bookings/:room_number' element={<RoomHistory />} />
         </Routes>
       </div>
     </div>

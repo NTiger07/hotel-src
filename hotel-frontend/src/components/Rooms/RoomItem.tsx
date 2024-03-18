@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router"
+
 const RoomItem = (props: any) => {
     const { room_number, room_name, price, room_type, status } = props
+    const navigate = useNavigate()
     let description
     switch (room_type) {
         case "basic":
@@ -43,7 +46,7 @@ const RoomItem = (props: any) => {
                     </b>
                 </button>
                 {/* <span className="text-[.9rem] text-primary-red mt-[1rem] w-full cursor-pointer hover:underline">View details...</span> */}
-                <span className="text-[.9rem] text-primary-red mt-[1rem] w-full cursor-pointer hover:underline">View booking history...</span>
+                <span className="text-[.9rem] text-primary-red mt-[1rem] w-full cursor-pointer hover:underline" onClick={() => { navigate(`/bookings/${room_number}`) }}>View booking history...</span>
             </div>
         </div>
     )

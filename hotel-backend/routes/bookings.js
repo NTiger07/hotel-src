@@ -3,52 +3,52 @@ const router = express.Router();
 const Booking = require("../models/Booking");
 const Room = require("../models/Room");
 
-async function updateRoomAvailability() {
-  try {
-    const currentTime = new Date();
+// async function updateRoomAvailability() {
+//   try {
+//     const currentTime = new Date();
 
-    const activeBookings = await Booking.find({
-      checkInDate: { $lte: currentTime },
-      checkOutDate: { $gte: currentTime },
-    });
+//     const activeBookings = await Booking.find({
+//       checkInDate: { $lte: currentTime },
+//       checkOutDate: { $gte: currentTime },
+//     });
 
-    for (const booking of activeBookings) {
-      await Booking.findOneAndUpdate(
-        {
-          _id: booking._id,
-        },
-        { status: "in-progress" }
-      );
-      await Room.findOneAndUpdate(
-        { roomNumber: booking.room_number },
-        { status: "occupied" }
-      );
-      console.log("Updated booking " + booking._id);
-    }
+//     for (const booking of activeBookings) {
+//       await Booking.findOneAndUpdate(
+//         {
+//           _id: booking._id,
+//         },
+//         { status: "in-progress" }
+//       );
+//       await Room.findOneAndUpdate(
+//         { roomNumber: booking.room_number },
+//         { status: "occupied" }
+//       );
+//       console.log("Updated booking " + booking._id);
+//     }
 
-    const endedBookings = await Booking.find({
-      checkOutDate: { $lt: currentTime },
-    });
+//     const endedBookings = await Booking.find({
+//       checkOutDate: { $lt: currentTime },
+//     });
 
-    for (const booking of endedBookings) {
-      await Booking.findOneAndUpdate(
-        {
-          _id: booking._id,
-        },
-        { status: "completed" }
-      );
-      await Room.findOneAndUpdate(
-        { roomNumber: booking.room_number },
-        { status: "available" }
-      );
-      console.log("Updated booking " + booking._id);
-    }
-  } catch (error) {
-    console.error("Error updating room availability:", error);
-  }
-}
+//     for (const booking of endedBookings) {
+//       await Booking.findOneAndUpdate(
+//         {
+//           _id: booking._id,
+//         },
+//         { status: "completed" }
+//       );
+//       await Room.findOneAndUpdate(
+//         { roomNumber: booking.room_number },
+//         { status: "available" }
+//       );
+//       console.log("Updated booking " + booking._id);
+//     }
+//   } catch (error) {
+//     console.error("Error updating room availability:", error);
+//   }
+// }
 
-setInterval(updateRoomAvailability, 60000);
+// setInterval(updateRoomAvailability, 60000);
 
 // @desc     Add Booking
 // @route    POST  "/bookings/add"
@@ -77,7 +77,14 @@ router.post("/add", async (req, res) => {
 router.get("/all", async (req, res) => {
   try {
     const bookings = await Booking.find();
-    res.send(bookings);
+    const bookingsWithRooms = [];
+    for (const booking of bookings) {
+      const room = await Room.findOne({ roomNumber: booking.room_number });
+      if (room) {
+        bookingsWithRooms.push({ booking, room });
+      }
+    }
+    res.send(bookingsWithRooms);
     res.status(200);
   } catch (error) {
     console.error(error);
@@ -93,7 +100,14 @@ router.get("/:room_number", async (req, res) => {
     const bookings = await Booking.find({
       room_number: req.params.room_number,
     });
-    res.send(bookings);
+    const bookingsWithRooms = [];
+    for (const booking of bookings) {
+      const room = await Room.findOne({ roomNumber: booking.room_number });
+      if (room) {
+        bookingsWithRooms.push({ booking, room });
+      }
+    }
+    res.send(bookingsWithRooms);
     res.status(200);
   } catch (error) {
     console.error(error);

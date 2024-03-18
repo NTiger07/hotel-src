@@ -23,7 +23,7 @@ const RoomsContainer = () => {
 
   const getRooms = () => {
     axios
-      .get(`${import.meta.env.VITE_CLOUD_URL}rooms/all`)
+      .get(`${import.meta.env.VITE_LOCAL_URL}rooms/all`)
       .then((res) => {
         setRooms(res.data)
       })

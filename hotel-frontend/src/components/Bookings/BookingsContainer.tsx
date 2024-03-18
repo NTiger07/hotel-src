@@ -1,16 +1,29 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import BookingItem from "./BookingItem"
 import AddBooking from "./AddBooking"
+import axios from "axios"
 
 const BookingsContainer = () => {
   const [isVisible, setIsVisible] = useState(false)
   const [clientName, setClientName] = useState("")
   const [status, setStatus] = useState("")
   const [roomType, setRoomType] = useState("")
+  const [bookings, setBookings] = useState([])
+useEffect(() => {getBookings()}, [])
+
+  const getBookings = () => {
+    axios
+      .get(`${import.meta.env.VITE_LOCAL_URL}bookings/all`)
+      .then((res) => {
+        setBookings(res.data)
+      })
+      .catch((err) => { console.error(err) })
+  }
+
 
   return (
     <div className="relative pt-[2rem]">
-      {isVisible ? <AddBooking /> : null}
+      {isVisible ? <AddBooking setIsVisible={setIsVisible} getBookings={getBookings}/> : null}
 
       <span className="text-primary-red font-bold text-[3rem]">Bookings</span>
 
@@ -64,30 +77,9 @@ const BookingsContainer = () => {
         <span className="w-[15.5%]">Status</span>
       </div>
       <div className="flex flex-col">
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={1} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
-        <BookingItem id={2} room_number={1} room_name="Deluxe Suite" room_type="luxury" client="Olaleru Favour" checkin="21st February, 2024" checkout="14th March, 2024" status="completed" />
+        {bookings?.map((booking: any, index) => (
+          <BookingItem id={index + 1} room_number={booking.room.roomNumber} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} />
+        ))}
       </div>
     </div>
   )

@@ -33,7 +33,7 @@ const BookingItem = (props: BookingProps) => {
             <span className="w-[17%]">{checkin}</span>
             <span className="w-[17%]">{checkout}</span>
             <span className="w-[15.5%]">{status[0].toUpperCase() + status.substring(1)}</span>
-            <div className="relative w-[2.5%] flex justify-center cursor-pointer">
+            <div className="relative w-[2.5%] flex justify-center">
                 <img
                     src="/icons/double-arrow.svg"
                     className="w-[22px] h-[20px]"
