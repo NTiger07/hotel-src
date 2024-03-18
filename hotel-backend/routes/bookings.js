@@ -76,7 +76,7 @@ router.post("/add", async (req, res) => {
 
 router.get("/all", async (req, res) => {
   try {
-    const bookings = await Booking.find();
+    const bookings = await Booking.find().sort({createdAt: "asc"});
     const bookingsWithRooms = [];
     for (const booking of bookings) {
       const room = await Room.findOne({ roomNumber: booking.room_number });

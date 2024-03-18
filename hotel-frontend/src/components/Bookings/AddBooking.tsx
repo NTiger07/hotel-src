@@ -10,7 +10,6 @@ const AddBooking = (props: any) => {
     const [newBooking, setNewBooking] = useState({
         client_name: "",
         room_number: 0,
-        // room_type: "",
         checkInDate: "",
         checkOutDate: "",
     })
@@ -18,7 +17,6 @@ const AddBooking = (props: any) => {
     const newBookingObject = {
         client_name: newBooking.client_name,
         room_number: newBooking.room_number,
-        // room_type: newBooking.room_type,
         checkInDate: newBooking.checkInDate,
         checkOutDate: newBooking.checkOutDate,
     }
@@ -36,7 +34,7 @@ const AddBooking = (props: any) => {
             })
     }
     return (
-        <div className="w-[50vw] p-[3rem] h-[65vh] absolute gap-3 z-50 bg-white rounded-lg shadow-lg flex flex-col items-center justify-between text-light-black font-medium">
+        <div className="w-[50vw] p-[3rem] h-[75vh] overflow-visible absolute gap-3 z-50 bg-white rounded-lg shadow-lg flex flex-col items-center justify-between text-light-black font-medium">
 
             <div className="NAME flex items-center w-full justify-between">
                 <span>Client name</span>

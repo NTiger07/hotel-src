@@ -7,13 +7,19 @@ const BookingsContainer = () => {
   const [isVisible, setIsVisible] = useState(false)
   const [clientName, setClientName] = useState("")
   const [status, setStatus] = useState("")
-  const [roomType, setRoomType] = useState("")
   const [bookings, setBookings] = useState([])
-useEffect(() => {getBookings()}, [])
+  useEffect(() => { getBookings() }, [clientName, status])
 
   const getBookings = () => {
+    const queryParams = {};
+    if (clientName) {
+      queryParams.client_name = clientName
+    }
+    if (status) {
+      queryParams.status = status
+    }
     axios
-      .get(`${import.meta.env.VITE_LOCAL_URL}bookings/all`)
+      .get(`${import.meta.env.VITE_LOCAL_URL}bookings/all`, {params: queryParams})
       .then((res) => {
         setBookings(res.data)
       })
@@ -22,8 +28,8 @@ useEffect(() => {getBookings()}, [])
 
 
   return (
-    <div className="relative pt-[2rem]">
-      {isVisible ? <AddBooking setIsVisible={setIsVisible} getBookings={getBookings}/> : null}
+    <div className="relative pt-[2rem] min-h-[80vh]">
+      {isVisible ? <AddBooking setIsVisible={setIsVisible} getBookings={getBookings} /> : null}
 
       <span className="text-primary-red font-bold text-[3rem]">Bookings</span>
 
@@ -35,14 +41,6 @@ useEffect(() => {getBookings()}, [])
             <option value="in-progress">In-progress</option>
             <option value="cancelled">Cancelled</option>
             <option value="completed">Completed</option>
-          </select>
-
-          <select value={roomType} onChange={(e) => setRoomType(e.target.value)} className="py-[.5rem] cursor-pointer px-[.6rem] text-[1.1rem] outline-none border rounded-md bg-transparent border-greys-etherium">
-            <option value="">All</option>
-            <option value="basic">Basic</option>
-            <option value="family">Family</option>
-            <option value="luxury">Luxury</option>
-            <option value="suite">Suite</option>
           </select>
 
           <div>
