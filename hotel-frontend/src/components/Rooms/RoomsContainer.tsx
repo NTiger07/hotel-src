@@ -3,12 +3,12 @@ import RoomItem from "./RoomItem"
 import AddRoom from "./AddRoom"
 import axios from "axios"
 type RoomType = {
-      map(arg0: (room: RoomType) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode
-      roomNumber: number,
-      room_name: string,
-      room_type: string,
-      price: number,
-      status: string,
+  map(arg0: (room: RoomType) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode
+  roomNumber: number,
+  room_name: string,
+  room_type: string,
+  price: number,
+  status: string,
 }
 const RoomsContainer = () => {
   const [isVisible, setIsVisible] = useState(false)
@@ -23,7 +23,7 @@ const RoomsContainer = () => {
 
   const getRooms = () => {
     axios
-      .get(`${import.meta.env.VITE_LOCAL_URL}rooms/all`)
+      .get(`${import.meta.env.VITE_CLOUD_URL}rooms/all`)
       .then((res) => {
         setRooms(res.data)
       })
@@ -71,11 +71,11 @@ const RoomsContainer = () => {
 
 
 
-      
- 
-      
+
+
+
       <div className="grid grid-cols-4 gap-y-[3rem] pb-[2rem] gap-x-3">
-        {rooms.map((room: RoomType) => (
+        {rooms?.map((room: RoomType) => (
           <RoomItem room_number={room.roomNumber} room_name={room.room_name} price={room.price} room_type={room.room_type} status={room.status} />
         ))}
       </div>
