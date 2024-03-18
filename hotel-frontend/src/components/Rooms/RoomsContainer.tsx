@@ -3,6 +3,7 @@ import RoomItem from "./RoomItem"
 import AddRoom from "./AddRoom"
 import axios from "axios"
 type RoomType = {
+      map(arg0: (room: RoomType) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode
       roomNumber: number,
       room_name: string,
       room_type: string,
@@ -18,7 +19,7 @@ const RoomsContainer = () => {
     getRooms()
   }, [])
 
-  const [rooms, setRooms] = useState<RoomType>([])
+  const [rooms, setRooms] = useState<RoomType>()
 
   const getRooms = () => {
     axios
@@ -74,7 +75,7 @@ const RoomsContainer = () => {
  
       
       <div className="grid grid-cols-4 gap-y-[3rem] pb-[2rem] gap-x-3">
-        {rooms.map((room) => (
+        {rooms.map((room: RoomType) => (
           <RoomItem room_number={room.roomNumber} room_name={room.room_name} price={room.price} room_type={room.room_type} status={room.status} />
         ))}
       </div>
