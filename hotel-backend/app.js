@@ -18,15 +18,15 @@ app.use(express.json())
 
 app.use(
   cors({
-    origin: "*",
+    origin: "https://hotel-frontend.netlify.app/",
     credentials: true,
-    // methods: ["GET", "POST"],
-    // allowedHeaders: [
-    //   "X-Requested-With",
-    //   "Content-Type",
-    //   "Credentials",
-    //   "Access-Control-Allow-Origin",
-    // ],
+    methods: ["GET", "POST"],
+    allowedHeaders: [
+      "X-Requested-With",
+      "Content-Type",
+      "Credentials",
+      "Access-Control-Allow-Origin",
+    ],
   })
 );
 
