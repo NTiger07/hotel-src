@@ -17,18 +17,28 @@ const RoomsContainer = () => {
 
   useEffect(() => {
     getRooms()
-  }, [])
+  }, [roomType, searchValue])
 
   const [rooms, setRooms] = useState<RoomType>()
 
   const getRooms = () => {
+    const queryParams = {};
+    if (roomType){
+      queryParams.room_type = roomType
+    }
+    if (searchValue){
+      queryParams.room_name = searchValue
+    }
+
     axios
-      .get(`${import.meta.env.VITE_LOCAL_URL}rooms/all`)
+      .get(`${import.meta.env.VITE_LOCAL_URL}rooms/all`, { params: queryParams }) 
       .then((res) => {
-        setRooms(res.data)
+        setRooms(res.data);
       })
-      .catch((err) => { console.error(err) })
-  }
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
 
   return (
