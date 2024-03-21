@@ -1,1 +1,2 @@
 home page
+redux maybe dump all rooms in redux
