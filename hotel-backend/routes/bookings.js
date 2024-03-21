@@ -3,19 +3,28 @@ const router = express.Router();
 const Booking = require("../models/Booking");
 const Room = require("../models/Room");
 
+// @desc     Add Booking
+// @route    POST "/bookings/add"
 
 router.post("/add", async (req, res) => {
   try {
-    await Booking.create(req.body);
-    await Room.findOneAndUpdate(
-      {
-        room_number: req.body.room_number,
-      },
-      { status: "booked" },
-      { new: true, runValidators: true }
-    );
-    res.send("Booking Added");
-    res.status(200);
+    const room = Room.find({ room_number: req.body.room_number });
+    if (!room) {
+      res.status(404);
+      res.send("Room not found");
+    }
+    if (room) {
+      await Booking.create(req.body);
+      await Room.findOneAndUpdate(
+        {
+          room_number: req.body.room_number,
+        },
+        { status: "booked" },
+        { new: true, runValidators: true }
+      );
+      res.send("Booking Added");
+      res.status(200);
+    }
   } catch (error) {
     console.error(error);
     res.status(500);
@@ -27,14 +36,14 @@ router.post("/add", async (req, res) => {
 
 router.get("/all", async (req, res) => {
   try {
-     let query = {};
-     if (req.query.status) {
-       query.status = req.query.status;
-     }
-     if (req.query.client_name) {
-       query.client_name = { $regex: new RegExp(req.query.client_name, "i") };
-     }
-    const bookings = await Booking.find(query).sort({createdAt: "desc"});
+    let query = {};
+    if (req.query.status) {
+      query.status = req.query.status;
+    }
+    if (req.query.client_name) {
+      query.client_name = { $regex: new RegExp(req.query.client_name, "i") };
+    }
+    const bookings = await Booking.find(query).sort({ createdAt: "desc" });
     const bookingsWithRooms = [];
     for (const booking of bookings) {
       const room = await Room.findOne({ room_number: booking.room_number });

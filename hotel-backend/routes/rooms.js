@@ -44,7 +44,7 @@ router.get("/all", async (req, res) => {
       query.room_type = req.query.room_type;
     }
     if (req.query.room_name) {
-       query.room_name = { $regex: new RegExp(req.query.room_name, "i") };
+      query.room_name = { $regex: new RegExp(req.query.room_name, "i") };
     }
     const rooms = await Room.find(query);
     res.send(rooms);
@@ -61,7 +61,9 @@ router.get("/all", async (req, res) => {
 router.get("/meta", async (req, res) => {
   try {
     const rooms = await Room.find();
-    res.send(rooms.length);
+    const bookings = await Booking.find();
+    const meta = { rooms: rooms.length, bookings: bookings.length };
+    res.send(meta);
     res.status(200);
   } catch (error) {
     console.error(error);

@@ -1,3 +1,2 @@
-does room exist
 is room available
 automatic availability
