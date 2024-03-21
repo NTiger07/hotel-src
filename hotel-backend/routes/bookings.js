@@ -8,17 +8,15 @@ const Room = require("../models/Room");
 
 router.post("/add", async (req, res) => {
   try {
-    const room = Room.find({ room_number: req.body.room_number });
+    const room = await Room.findOne({ room_number: req.body.room_number });
     if (!room) {
       res.status(404);
       res.send("Room not found");
     }
     if (room) {
+      console.log(room)
       await Booking.create(req.body);
-      await Room.findOneAndUpdate(
-        {
-          room_number: req.body.room_number,
-        },
+      await room.updateOne(
         { status: "booked" },
         { new: true, runValidators: true }
       );

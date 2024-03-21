@@ -31,6 +31,10 @@ const AddBooking = (props: any) => {
             })
             .catch((err) => {
                 console.error(err)
+                if (err.response.data == "Room not found"){
+                    toast.error("Room doesn't exist")
+                    setIsVisible(false)
+                }
             })
     }
     return (

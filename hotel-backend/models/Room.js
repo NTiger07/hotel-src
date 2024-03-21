@@ -7,6 +7,10 @@ const RoomSchema = new mongoose.Schema({
     type: String,
     enum: ["basic", "family", "luxury", "suite"],
   },
+  // next_available: {
+  //   type: String,
+  //   require: false,
+  // },
   price: { type: Number, required: true },
   status: {
     type: String,

@@ -1,2 +1,4 @@
 is room available
+next_available
 automatic availability
+FE date validation change to range component maybe

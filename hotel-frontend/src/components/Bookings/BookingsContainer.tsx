@@ -27,7 +27,9 @@ const BookingsContainer = () => {
       .then((res) => {
         setBookings(res.data)
       })
-      .catch((err) => { console.error(err) })
+      .catch((err) => { 
+        console.error(err)
+      })
   }
 
 
