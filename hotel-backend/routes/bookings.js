@@ -27,7 +27,14 @@ router.post("/add", async (req, res) => {
 
 router.get("/all", async (req, res) => {
   try {
-    const bookings = await Booking.find().sort({createdAt: "desc"});
+     let query = {};
+     if (req.query.status) {
+       query.status = req.query.status;
+     }
+     if (req.query.client_name) {
+       query.client_name = { $regex: new RegExp(req.query.client_name, "i") };
+     }
+    const bookings = await Booking.find(query).sort({createdAt: "desc"});
     const bookingsWithRooms = [];
     for (const booking of bookings) {
       const room = await Room.findOne({ room_number: booking.room_number });

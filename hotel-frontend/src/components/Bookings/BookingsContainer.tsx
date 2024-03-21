@@ -38,6 +38,7 @@ const BookingsContainer = () => {
         <div className="FILTER flex items-center gap-[2rem]">
           <select value={status} onChange={(e) => setStatus(e.target.value)} className="py-[.5rem] cursor-pointer px-[.6rem] text-[1.1rem] outline-none border rounded-md bg-transparent border-greys-etherium">
             <option value="">All</option>
+            <option value="pending">Pending</option>
             <option value="in-progress">In-progress</option>
             <option value="cancelled">Cancelled</option>
             <option value="completed">Completed</option>
