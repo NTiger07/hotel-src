@@ -10,16 +10,20 @@ const BookingsContainer = () => {
   const [bookings, setBookings] = useState([])
   useEffect(() => { getBookings() }, [clientName, status])
 
+  const [length, setLength] = useState(0)
+
   const getBookings = () => {
     const queryParams = {};
     if (clientName) {
       queryParams.client_name = clientName
+      setLength(length + 1)
     }
     if (status) {
       queryParams.status = status
+      setLength(length + 1)
     }
     axios
-      .get(`${import.meta.env.VITE_LOCAL_URL}bookings/all`, {params: queryParams})
+      .get(`${import.meta.env.VITE_LOCAL_URL}bookings/all`, { params: queryParams })
       .then((res) => {
         setBookings(res.data)
       })
@@ -35,7 +39,7 @@ const BookingsContainer = () => {
 
       <div className="FILTERADD flex items-center justify-between py-[3rem]">
 
-        <div className="FILTER flex items-center gap-[2rem]">
+        {bookings?.length == 0 && length < 0 ? <div></div> : <div className="FILTER flex items-center gap-[2rem]">
           <select value={status} onChange={(e) => setStatus(e.target.value)} className="py-[.5rem] cursor-pointer px-[.6rem] text-[1.1rem] outline-none border rounded-md bg-transparent border-greys-etherium">
             <option value="">All</option>
             <option value="pending">Pending</option>
@@ -53,7 +57,7 @@ const BookingsContainer = () => {
               placeholder="Search client"
             />
           </div>
-        </div>
+        </div>}
 
 
         <div className="ADD bg-primary-red rounded-lg flex py-[.6rem] px-[2rem] justify-between cursor-pointer" onClick={() => { setIsVisible(!isVisible) }}>
@@ -66,15 +70,20 @@ const BookingsContainer = () => {
       </div>
 
 
+      {bookings?.length == 0 && length > 0 ? <div className="items-center font-semibold text-[2rem] flex flex-col mt-[1rem]">No bookings match this criteria</div> : null}
+      {length == 0 && bookings?.length == 0 ? <div className="items-center font-semibold text-[2rem] flex flex-col mt-[1rem]">There are currently no bookings. <span>Click on <span className="text-primary-red">Add Booking</span> to add a booking.</span></div> : null}
 
-      <div className="bg-[#f9f9f9] py-[1.5%] px-[3%] pr-[5.5%] font-bold flex items-center rounded-t-md">
+
+
+      {bookings?.length == 0 ? null : <div className="bg-[#f9f9f9] py-[1.5%] px-[3%] pr-[5.5%] font-bold flex items-center rounded-t-md">
         <span className="w-[25%]">Client Name</span>
         <span className="w-[12%]">Room No.</span>
         <span className="w-[15.5%]">Room Type</span>
         <span className="w-[17%]">Check-in Date</span>
         <span className="w-[17%]">Check-out Date</span>
         <span className="w-[15.5%]">Status</span>
-      </div>
+      </div>}
+
       <div className="flex flex-col">
         {bookings?.map((booking: any, index) => (
           <BookingItem id={index + 1} room_number={booking.room.room_number} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} />

@@ -3,6 +3,7 @@ import RoomItem from "./RoomItem"
 import AddRoom from "./AddRoom"
 import axios from "axios"
 type RoomType = {
+  length: number
   map(arg0: (room: RoomType) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode
   room_number: number,
   room_name: string,
@@ -11,6 +12,7 @@ type RoomType = {
   status: string,
 }
 const RoomsContainer = () => {
+  const [rooms, setRooms] = useState<RoomType>([])
   const [isVisible, setIsVisible] = useState(false)
   const [searchValue, setSearchValue] = useState("")
   const [roomType, setRoomType] = useState("")
@@ -19,19 +21,21 @@ const RoomsContainer = () => {
     getRooms()
   }, [roomType, searchValue])
 
-  const [rooms, setRooms] = useState<RoomType>()
+  const [length, setLength] = useState(0)
 
   const getRooms = () => {
     const queryParams = {};
-    if (roomType){
+    if (roomType) {
       queryParams.room_type = roomType
+      setLength(length + 1)
     }
-    if (searchValue){
+    if (searchValue) {
       queryParams.room_name = searchValue
+      setLength(length + 1)
     }
 
     axios
-      .get(`${import.meta.env.VITE_LOCAL_URL}rooms/all`, { params: queryParams }) 
+      .get(`${import.meta.env.VITE_LOCAL_URL}rooms/all`, { params: queryParams })
       .then((res) => {
         setRooms(res.data);
       })
@@ -49,7 +53,7 @@ const RoomsContainer = () => {
 
       <div className="FILTERADD flex items-center justify-between py-[3rem]">
 
-        <div className="FILTER flex items-center gap-[2rem]">
+        {rooms?.length == 0 && length < 0 ? <div></div> : <div className="FILTER flex items-center gap-[2rem]">
 
           <select value={roomType} onChange={(e) => setRoomType(e.target.value)} className="py-[.5rem] cursor-pointer px-[.6rem] text-[1.1rem] outline-none border rounded-md bg-transparent border-greys-etherium">
             <option value="">All</option>
@@ -68,7 +72,7 @@ const RoomsContainer = () => {
               placeholder="Search rooms"
             />
           </div>
-        </div>
+        </div>}
 
         <div className="ADD bg-primary-red rounded-lg flex py-[.6rem] px-[2rem] justify-between cursor-pointer" onClick={() => setIsVisible(!isVisible)}>
           <a className="[text-decoration:none] w-fit flex flex-row items-center justify-start gap-[4px]">
@@ -80,7 +84,8 @@ const RoomsContainer = () => {
       </div>
 
 
-
+      {rooms?.length == 0 && length > 0 ? <div className="items-center font-semibold text-[2rem] flex flex-col mt-[1rem]">No rooms match this criteria</div> : null}
+      {length == 0 && rooms?.length == 0 ? <div className="items-center font-semibold text-[2rem] flex flex-col mt-[1rem]">There are currently no rooms. <span>Click on <span className="text-primary-red">Add Room</span> to add a room.</span></div> : null}
 
 
 
