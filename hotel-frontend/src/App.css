@@ -6,6 +6,10 @@
 
 @import "react-toastify/dist/ReactToastify.css";
 
+@import 'react-date-range/dist/styles.css'; 
+
+@import 'react-date-range/dist/theme/default.css';
+
 @font-face {
   font-family: "Lexend_Deca";
   src: local("Lexend_Deca"),

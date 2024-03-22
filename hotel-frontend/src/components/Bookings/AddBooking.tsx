@@ -1,11 +1,17 @@
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers"
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
+// import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers"
+// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import axios from "axios"
-import dayjs from "dayjs"
+// import dayjs from "dayjs"
 import { useState } from "react"
 import { toast } from "react-toastify"
+import { DateRange } from "react-date-range"
 
 const AddBooking = (props: any) => {
+    const selectionRange = {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: 'selection',
+    };
     const { setIsVisible, getBookings } = props
     const [newBooking, setNewBooking] = useState({
         client_name: "",
@@ -31,7 +37,7 @@ const AddBooking = (props: any) => {
             })
             .catch((err) => {
                 console.error(err)
-                if (err.response.data == "Room not found"){
+                if (err.response.data == "Room not found") {
                     toast.error("Room doesn't exist")
                     setIsVisible(false)
                 }
@@ -79,7 +85,7 @@ const AddBooking = (props: any) => {
 
 
 
-            <div className="CHECKIN w-full flex items-center justify-between">
+            {/* <div className="CHECKIN w-full flex items-center justify-between">
                 <span>Check-In Date</span>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker
@@ -106,7 +112,12 @@ const AddBooking = (props: any) => {
                 </LocalizationProvider>
 
 
-            </div>
+            </div> */}
+
+            <DateRange
+                ranges={[selectionRange]}
+                onChange={() => console.log(selectionRange)}
+            />
 
             <div className="w-[20%] ml-[.7rem] flex justify-center items-center mt-[2rem]">
                 <button
