@@ -1,30 +1,30 @@
-// import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers"
-// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import axios from "axios"
-// import dayjs from "dayjs"
+import dayjs from "dayjs"
 import { useState } from "react"
 import { toast } from "react-toastify"
-import { DateRange } from "react-date-range"
+import { DateRange, Range } from "react-date-range"
 
 const AddBooking = (props: any) => {
-    const selectionRange = {
-        startDate: new Date(),
-        endDate: new Date(),
-        key: 'selection',
-    };
     const { setIsVisible, getBookings } = props
+
+    const [selectionRange, setSelectionRange] = useState<Range>(
+        {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: 'selection',
+        }
+    )
+
     const [newBooking, setNewBooking] = useState({
         client_name: "",
         room_number: 0,
-        checkInDate: "",
-        checkOutDate: "",
     })
 
     const newBookingObject = {
         client_name: newBooking.client_name,
         room_number: newBooking.room_number,
-        checkInDate: newBooking.checkInDate,
-        checkOutDate: newBooking.checkOutDate,
+        checkInDate: dayjs(selectionRange.startDate).format("DD-MM-YYYY"),
+        checkOutDate: dayjs(selectionRange.endDate).format("DD-MM-YYYY"),
     }
 
     const addBooking = () => {
@@ -44,7 +44,7 @@ const AddBooking = (props: any) => {
             })
     }
     return (
-        <div className="w-[50vw] p-[3rem] h-[75vh] overflow-visible absolute gap-3 z-50 bg-white rounded-lg shadow-lg flex flex-col items-center justify-between text-light-black font-medium">
+        <div className="w-[50vw] p-[3rem] h-[80vh] overflow-visible absolute gap-3 z-50 bg-white rounded-lg shadow-lg flex flex-col items-center justify-between text-light-black font-medium">
 
             <div className="NAME flex items-center w-full justify-between">
                 <span>Client name</span>
@@ -70,66 +70,27 @@ const AddBooking = (props: any) => {
                 />
             </div>
 
-            {/* <div className="TYPE flex w-full items-center justify-between">
-                <span>Room type</span>
-                <select className="py-[.5rem] cursor-pointer px-[.6rem] text-[1.1rem] outline-none border rounded-md bg-transparent border-greys-etherium"
-                    value={newBooking.room_type}
-                    onChange={(e) => setNewBooking({ ...newBooking, room_type: e.target.value })}
-                >
-                    <option value="basic">Basic</option>
-                    <option value="family">Family</option>
-                    <option value="luxury">Luxury</option>
-                    <option value="suite">Suite</option>
-                </select>
-            </div> */}
+            <div className="flex items-center w-full justify-between">
+                <DateRange
+                    ranges={[selectionRange]}
+                    onChange={(changes) => setSelectionRange(changes.selection)}
+                    minDate={new Date}
+                />
 
+                <div className="w-[20%] ml-[.7rem] flex justify-center items-center mt-[2rem]">
+                    <button
+                        className="cursor-pointer bg-[transparent] h-[3rem] w-[100%] rounded-3xs flex flex-row items-center justify-center border-[1px] border-solid border-primary-red"
+                        onClick={addBooking}
+                    >
+                        <img src="/icons/add-red.svg" alt="" />
+                        <b className="relative text-base text-primary-red text-center">
+                            Add
+                        </b>
+                    </button>
+                </div>
 
-
-            {/* <div className="CHECKIN w-full flex items-center justify-between">
-                <span>Check-In Date</span>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                        disablePast
-                        label="Check-In Date"
-                        value={dayjs(newBooking.checkInDate)}
-                        onChange={(time) => setNewBooking({ ...newBooking, checkInDate: dayjs(time, 'DD-MM-YYYY').format('DD-MM-YYYY') })}
-                        format="DD-MM-YYYY"
-                    />
-                </LocalizationProvider>
             </div>
 
-
-            <div className="CHECKOUT w-full flex items-center justify-between">
-                <span>Check-Out Date</span>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                        disablePast
-                        label="Check-Out Date"
-                        value={dayjs(newBooking.checkOutDate)}
-                        onChange={(time) => setNewBooking({ ...newBooking, checkOutDate: dayjs(time, 'DD-MM-YYYY').format('DD-MM-YYYY') })}
-                        format="DD-MM-YYYY"
-                    />
-                </LocalizationProvider>
-
-
-            </div> */}
-
-            <DateRange
-                ranges={[selectionRange]}
-                onChange={() => console.log(selectionRange)}
-            />
-
-            <div className="w-[20%] ml-[.7rem] flex justify-center items-center mt-[2rem]">
-                <button
-                    className="cursor-pointer bg-[transparent] h-[3rem] w-[100%] rounded-3xs flex flex-row items-center justify-center border-[1px] border-solid border-primary-red"
-                    onClick={addBooking}
-                >
-                    <img src="/icons/add-red.svg" alt="" />
-                    <b className="relative text-base text-primary-red text-center">
-                        Add
-                    </b>
-                </button>
-            </div>
 
         </div>
     )

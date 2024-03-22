@@ -34,7 +34,7 @@ const BookingsContainer = () => {
 
 
   return (
-    <div className="relative pt-[2rem] min-h-[80vh]">
+    <div className="relative pt-[2rem] min-h-[90vh]">
       {isVisible ? <AddBooking setIsVisible={setIsVisible} getBookings={getBookings} /> : null}
 
       <span className="text-primary-red font-bold text-[3rem]">Bookings</span>
