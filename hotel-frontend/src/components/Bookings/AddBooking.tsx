@@ -1,5 +1,4 @@
 import axios from "axios"
-import dayjs from "dayjs"
 import { useState } from "react"
 import { toast } from "react-toastify"
 import { DateRange, Range } from "react-date-range"
@@ -23,8 +22,8 @@ const AddBooking = (props: any) => {
     const newBookingObject = {
         client_name: newBooking.client_name,
         room_number: newBooking.room_number,
-        checkInDate: dayjs(selectionRange.startDate).format("DD-MM-YYYY"),
-        checkOutDate: dayjs(selectionRange.endDate).format("DD-MM-YYYY"),
+        checkInDate: selectionRange.startDate,
+        checkOutDate: selectionRange.endDate,
     }
 
     const addBooking = () => {
@@ -39,7 +38,10 @@ const AddBooking = (props: any) => {
                 console.error(err)
                 if (err.response.data == "Room not found") {
                     toast.error("Room doesn't exist")
-                    setIsVisible(false)
+                }
+
+                if (err.response.data == "Room already booked for the given time") {
+                    toast.error("Room already booked for the given time")
                 }
             })
     }

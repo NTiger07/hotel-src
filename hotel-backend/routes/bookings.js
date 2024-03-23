@@ -8,13 +8,24 @@ const Room = require("../models/Room");
 
 router.post("/add", async (req, res) => {
   try {
-    const room = await Room.findOne({ room_number: req.body.room_number });
+    const { room_number, checkInDate, checkOutDate } = req.body;
+    const room = await Room.findOne({ room_number });
     if (!room) {
       res.status(404);
       res.send("Room not found");
     }
-    if (room) {
-      console.log(room)
+    const existingBooking = await Booking.findOne({
+      room_number,
+      $and: [
+        { checkInDate: { $lte: checkOutDate }, checkOutDate: { $gte: checkInDate } },
+        { checkInDate: { $gte: checkInDate, $lte: checkOutDate } },
+      ],
+    });
+    if (existingBooking) {
+      res.status(400);
+      res.send("Room already booked for the given time");
+    }
+    if (room && !existingBooking) {
       await Booking.create(req.body);
       await room.updateOne(
         { status: "booked" },

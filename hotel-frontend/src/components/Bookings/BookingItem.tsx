@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useMemo } from "react";
 
 type BookingProps = {
@@ -6,8 +7,8 @@ type BookingProps = {
     room_name: string,
     room_type: string,
     client: string,
-    checkin: string,
-    checkout: string,
+    checkin: Date,
+    checkout: Date,
     status: string
 
 }
@@ -30,8 +31,8 @@ const BookingItem = (props: BookingProps) => {
                 <span>{room_name}</span>
                 <span className="text-[.9rem] text-greys-etherium">{room_type[0].toUpperCase() + room_type.substring(1)} room</span>
             </div>
-            <span className="w-[17%]">{checkin}</span>
-            <span className="w-[17%]">{checkout}</span>
+            <span className="w-[17%]">{dayjs(checkin).format("DD-MM-YYYY")}</span>
+            <span className="w-[17%]">{dayjs(checkout).format("DD-MM-YYYY")}</span>
             <span className="w-[15.5%]">{status[0].toUpperCase() + status.substring(1)}</span>
             <div className="relative w-[2.5%] flex justify-center">
                 <img
