@@ -9,7 +9,7 @@ const RoomItem = (props: any) => {
             description = "Experience simplicity and comfort in our cozy basic room, perfect for a peaceful retreat."
             break;
         case "family":
-            description = "Create cherished memories with your loved ones in our spacious family room, designed for shared moments and relaxation."
+            description = "Create cherished memories with your loved ones in our spacious family room."
             break;
         case "luxury":
             description = "Elevate your stay with our luxurious room, where opulence meets comfort, ensuring a truly lavish experience."

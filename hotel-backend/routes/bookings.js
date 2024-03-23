@@ -98,7 +98,7 @@ router.post("/cancel/:booking_id", async (req, res) => {
   try {
     await Booking.findOneAndUpdate(
       {
-        room_number: req.params.room_number,
+        _id: req.params.booking_id,
       },
       { status: "cancelled" }
     );

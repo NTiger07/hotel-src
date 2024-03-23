@@ -27,7 +27,7 @@ const BookingsContainer = () => {
       .then((res) => {
         setBookings(res.data)
       })
-      .catch((err) => { 
+      .catch((err) => {
         console.error(err)
       })
   }
@@ -88,7 +88,7 @@ const BookingsContainer = () => {
 
       <div className="flex flex-col">
         {bookings?.map((booking: any, index) => (
-          <BookingItem id={index + 1} room_number={booking.room.room_number} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} />
+          <BookingItem id={booking.booking._id} index={index + 1} room_number={booking.room.room_number} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} getBookings={getBookings} />
         ))}
       </div>
     </div>
