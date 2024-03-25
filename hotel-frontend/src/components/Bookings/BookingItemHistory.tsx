@@ -14,11 +14,11 @@ type BookingProps = {
     checkin: Date,
     checkout: Date,
     status: string,
-    getBookings: () => void
+    getBookingsHistory: () => void
 }
 
-const BookingItem = (props: BookingProps) => {
-    const { id, index, room_number, room_name, room_type, client, checkin, checkout, status, getBookings } = props
+const BookingItemHistory = (props: BookingProps) => {
+    const { id, index, room_number, room_name, room_type, client, checkin, checkout, status, getBookingsHistory } = props
     const [isVisible, setIsVisible] = useState(false)
 
     const setBackdropStyle = useMemo(() => {
@@ -34,7 +34,7 @@ const BookingItem = (props: BookingProps) => {
             .then(() => {
                 toast.info("Appointment cancelled")
                 setIsVisible(false)
-                getBookings()
+                getBookingsHistory()
             })
             .catch((err) => {
                 console.error(err)
@@ -95,4 +95,4 @@ const BookingItem = (props: BookingProps) => {
     )
 }
 
-export default BookingItem
+export default BookingItemHistory

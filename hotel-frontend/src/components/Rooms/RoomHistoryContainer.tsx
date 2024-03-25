@@ -1,12 +1,12 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
-import BookingItem from "../Bookings/BookingItem"
+import BookingItemHistory from "../Bookings/BookingItemHistory"
 
 const RoomHistoryContainer = (props: any) => {
   const { room_number } = props
   const navigate = useNavigate()
-  const [bookingHistory, setBookingHistory] = useState()
+  const [bookingHistory, setBookingHistory] = useState<any>()
 
   useEffect(() => {
     getBookingsHistory()
@@ -20,6 +20,7 @@ const RoomHistoryContainer = (props: any) => {
       })
       .catch((err) => { console.error(err) })
   }
+
   return (
     <div className="flex flex-col mt-[2rem]">
       <span className="cursor-pointer flex items-center gap-2 bg-primary-red text-black font-medium rounded-lg shadow-lg w-[8rem] p-[1rem]" onClick={() => { navigate(-1) }}> <img src="/icons/arrow-left.svg" className="w-[1rem]" alt="" />Go back</span>
@@ -37,8 +38,8 @@ const RoomHistoryContainer = (props: any) => {
             <span className="w-[15.5%]">Status</span>
           </div>
           <div className="flex flex-col">
-          {bookingHistory?.map((booking: any, index) => (
-            <BookingItem id={index + 1} room_number={booking.room.room_number} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} />
+          {bookingHistory?.map((booking: any, index: number) => (
+            <BookingItemHistory id={booking.booking._id} index={index + 1} room_number={booking.room.room_number} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} getBookingsHistory={getBookingsHistory}/>
           ))}
         </div>
         </div>

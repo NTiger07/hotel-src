@@ -12,7 +12,7 @@ type RoomType = {
   status: string,
 }
 const RoomsContainer = () => {
-  const [rooms, setRooms] = useState<RoomType>([])
+  const [rooms, setRooms] = useState<RoomType>()
   const [isVisible, setIsVisible] = useState(false)
   const [searchValue, setSearchValue] = useState("")
   const [roomType, setRoomType] = useState("")
@@ -24,7 +24,7 @@ const RoomsContainer = () => {
   const [length, setLength] = useState(0)
 
   const getRooms = () => {
-    const queryParams = {};
+    const queryParams:any = {};
     if (roomType) {
       queryParams.room_type = roomType
       setLength(length + 1)
