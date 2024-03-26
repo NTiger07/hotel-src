@@ -2,17 +2,21 @@ import { useEffect, useState } from "react"
 import BookingItem from "./BookingItem"
 import AddBooking from "./AddBooking"
 import axios from "axios"
+import Loader from "../Loader"
 
 const BookingsContainer = () => {
   const [isVisible, setIsVisible] = useState(false)
   const [clientName, setClientName] = useState("")
   const [status, setStatus] = useState("")
   const [bookings, setBookings] = useState([])
+  const [loader, setLoader] = useState(false)
+
   useEffect(() => { getBookings() }, [clientName, status])
 
   const [length, setLength] = useState(0)
 
   const getBookings = () => {
+    setLoader(true)
     const queryParams: any = {};
     if (clientName) {
       queryParams.client_name = clientName
@@ -26,9 +30,11 @@ const BookingsContainer = () => {
       .get(`${import.meta.env.VITE_CLOUD_URL}bookings/all`, { params: queryParams })
       .then((res) => {
         setBookings(res.data)
+        setLoader(false)
       })
       .catch((err) => {
         console.error(err)
+        setLoader(false)
       })
   }
 
@@ -36,6 +42,7 @@ const BookingsContainer = () => {
   return (
     <div className="relative pt-[2rem] min-h-[90vh]">
       {isVisible ? <AddBooking setIsVisible={setIsVisible} getBookings={getBookings} /> : null}
+      {loader ? <div className="absolute z-50 top-[60%] left-[50%]"><Loader /></div> : null}
 
       <span className="text-primary-red font-bold text-[3rem]">Bookings</span>
 
@@ -73,7 +80,7 @@ const BookingsContainer = () => {
 
 
       {bookings?.length == 0 && length > 0 ? <div className="items-center font-semibold text-[2rem] flex flex-col mt-[1rem]">No bookings match this criteria</div> : null}
-      {length == 0 && bookings?.length == 0 ? <div className="items-center font-semibold text-[2rem] flex flex-col mt-[1rem]">There are currently no bookings. <span>Click on <span className="text-primary-red">Add Booking</span> to add a booking.</span></div> : null}
+      {/* {length == 0 && bookings?.length == 0 ? <div className="items-center font-semibold text-[2rem] flex flex-col mt-[1rem]">There are currently no bookings. <span>Click on <span className="text-primary-red">Add Booking</span> to add a booking.</span></div> : null} */}
 
 
 

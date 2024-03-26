@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import RoomItem from "./RoomItem"
 import AddRoom from "./AddRoom"
 import axios from "axios"
+import Loader from "../Loader"
+
 type RoomType = {
   length: number
   map(arg0: (room: RoomType) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode
@@ -16,6 +18,7 @@ const RoomsContainer = () => {
   const [isVisible, setIsVisible] = useState(false)
   const [searchValue, setSearchValue] = useState("")
   const [roomType, setRoomType] = useState("")
+  const [loader, setLoader] = useState(false)
 
   useEffect(() => {
     getRooms()
@@ -24,6 +27,7 @@ const RoomsContainer = () => {
   const [length, setLength] = useState(0)
 
   const getRooms = () => {
+    setLoader(true)
     const queryParams: any = {};
     if (roomType) {
       queryParams.room_type = roomType
@@ -38,9 +42,11 @@ const RoomsContainer = () => {
       .get(`${import.meta.env.VITE_CLOUD_URL}rooms/all`, { params: queryParams })
       .then((res) => {
         setRooms(res.data);
+        setLoader(false)
       })
       .catch((err) => {
         console.error(err);
+        setLoader(false)
       });
   };
 
@@ -48,7 +54,7 @@ const RoomsContainer = () => {
   return (
     <div className="relative pt-[2rem] min-h-[70vh]">
       {isVisible ? <AddRoom setIsVisible={setIsVisible} getRooms={getRooms} /> : null}
-
+      {loader ? <div className="absolute z-50 top-[60%] left-[45%]"><Loader /></div> : null}
       <span className="text-primary-red font-bold text-[3rem]">Rooms</span>
 
       <div className="FILTERADD flex items-center justify-between py-[3rem]">

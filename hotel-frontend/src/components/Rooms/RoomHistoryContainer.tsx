@@ -2,27 +2,35 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import BookingItemHistory from "../Bookings/BookingItemHistory"
+import Loader from "../Loader"
 
 const RoomHistoryContainer = (props: any) => {
   const { room_number } = props
   const navigate = useNavigate()
   const [bookingHistory, setBookingHistory] = useState<any>()
+  const [loader, setLoader] = useState(false)
 
   useEffect(() => {
     getBookingsHistory()
   }, [])
 
   const getBookingsHistory = () => {
+    setLoader(true)
     axios
       .get(`${import.meta.env.VITE_CLOUD_URL}bookings/${room_number}`)
       .then((res) => {
         setBookingHistory(res.data)
+        setLoader(false)
       })
-      .catch((err) => { console.error(err) })
+      .catch((err) => {
+        console.error(err)
+        setLoader(false)
+      })
   }
 
   return (
     <div className="flex flex-col mt-[2rem]">
+      {loader ? <div className="absolute z-50 top-[65%] left-[45%]"><Loader /></div> : null}
       <span className="cursor-pointer flex items-center gap-2 bg-primary-red text-black font-medium rounded-lg shadow-lg w-[8rem] p-[1rem]" onClick={() => { navigate(-1) }}> <img src="/icons/arrow-left.svg" className="w-[1rem]" alt="" />Go back</span>
       {bookingHistory?.length == 0 ? <span className="font-bold text-[3rem] flex items-center justify-center h-[70vh]">This room has no booking history</span> :
 
