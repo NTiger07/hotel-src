@@ -35,7 +35,7 @@ const RoomItem = (props: any) => {
                     <span>$ {price}</span>
                 </div>
                 <span className="w-full text-[.8rem]">Room {room_number}</span>
-                <p className="w-full py-[3%]">
+                <p className="w-full py-[3%] h-[7rem]">
                     {description}
                 </p>
                 <button

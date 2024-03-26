@@ -46,7 +46,7 @@ router.get("/all", async (req, res) => {
     if (req.query.room_name) {
       query.room_name = { $regex: new RegExp(req.query.room_name, "i") };
     }
-    const rooms = await Room.find(query);
+    const rooms = await Room.find(query).sort({room_number: "asc"});
     res.send(rooms);
     res.status(200);
   } catch (error) {
