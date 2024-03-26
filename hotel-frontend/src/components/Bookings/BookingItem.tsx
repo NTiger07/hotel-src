@@ -30,7 +30,7 @@ const BookingItem = (props: BookingProps) => {
 
     const cancelAppointment = () => {
         axios
-            .post(`${import.meta.env.VITE_LOCAL_URL}bookings/cancel/${id}`)
+            .post(`${import.meta.env.VITE_CLOUD_URL}bookings/cancel/${id}`)
             .then(() => {
                 toast.info("Appointment cancelled")
                 setIsVisible(false)

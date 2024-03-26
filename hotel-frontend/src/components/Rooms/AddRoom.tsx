@@ -18,7 +18,7 @@ const AddRoom = (props: any) => {
 
     const addRoom = () => {
         axios
-            .post(`${import.meta.env.VITE_LOCAL_URL}rooms/add`, newRoomObject)
+            .post(`${import.meta.env.VITE_CLOUD_URL}rooms/add`, newRoomObject)
             .then(() => {
                 toast.info("New Room Added")
                 setIsVisible(false)

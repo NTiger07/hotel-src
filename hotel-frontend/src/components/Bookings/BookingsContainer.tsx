@@ -13,7 +13,7 @@ const BookingsContainer = () => {
   const [length, setLength] = useState(0)
 
   const getBookings = () => {
-    const queryParams:any = {};
+    const queryParams: any = {};
     if (clientName) {
       queryParams.client_name = clientName
       setLength(length + 1)
@@ -23,7 +23,7 @@ const BookingsContainer = () => {
       setLength(length + 1)
     }
     axios
-      .get(`${import.meta.env.VITE_LOCAL_URL}bookings/all`, { params: queryParams })
+      .get(`${import.meta.env.VITE_CLOUD_URL}bookings/all`, { params: queryParams })
       .then((res) => {
         setBookings(res.data)
       })
@@ -88,7 +88,7 @@ const BookingsContainer = () => {
 
       <div className="flex flex-col">
         {bookings?.map((booking: any, index) => (
-          <BookingItem id={booking.booking._id} index={index + 1} room_number={booking.room.room_number} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} getBookings={getBookings}/>
+          <BookingItem id={booking.booking._id} index={index + 1} room_number={booking.room.room_number} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} getBookings={getBookings} />
         ))}
       </div>
     </div>

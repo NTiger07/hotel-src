@@ -28,7 +28,7 @@ const AddBooking = (props: any) => {
 
     const addBooking = () => {
         axios
-            .post(`${import.meta.env.VITE_LOCAL_URL}bookings/add`, newBookingObject)
+            .post(`${import.meta.env.VITE_CLOUD_URL}bookings/add`, newBookingObject)
             .then(() => {
                 toast.info("New Booking Added")
                 setIsVisible(false)

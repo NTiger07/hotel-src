@@ -14,7 +14,7 @@ const RoomHistoryContainer = (props: any) => {
 
   const getBookingsHistory = () => {
     axios
-      .get(`${import.meta.env.VITE_LOCAL_URL}bookings/${room_number}`)
+      .get(`${import.meta.env.VITE_CLOUD_URL}bookings/${room_number}`)
       .then((res) => {
         setBookingHistory(res.data)
       })
@@ -38,10 +38,10 @@ const RoomHistoryContainer = (props: any) => {
             <span className="w-[15.5%]">Status</span>
           </div>
           <div className="flex flex-col">
-          {bookingHistory?.map((booking: any, index: number) => (
-            <BookingItemHistory id={booking.booking._id} index={index + 1} room_number={booking.room.room_number} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} getBookingsHistory={getBookingsHistory}/>
-          ))}
-        </div>
+            {bookingHistory?.map((booking: any, index: number) => (
+              <BookingItemHistory id={booking.booking._id} index={index + 1} room_number={booking.room.room_number} room_name={booking.room.room_name} room_type={booking.room.room_type} client={booking.booking.client_name} checkin={booking.booking.checkInDate} checkout={booking.booking.checkOutDate} status={booking.booking.status} getBookingsHistory={getBookingsHistory} />
+            ))}
+          </div>
         </div>
 
 

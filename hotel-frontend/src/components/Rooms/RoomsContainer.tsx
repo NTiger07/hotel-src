@@ -24,7 +24,7 @@ const RoomsContainer = () => {
   const [length, setLength] = useState(0)
 
   const getRooms = () => {
-    const queryParams:any = {};
+    const queryParams: any = {};
     if (roomType) {
       queryParams.room_type = roomType
       setLength(length + 1)
@@ -35,7 +35,7 @@ const RoomsContainer = () => {
     }
 
     axios
-      .get(`${import.meta.env.VITE_LOCAL_URL}rooms/all`, { params: queryParams })
+      .get(`${import.meta.env.VITE_CLOUD_URL}rooms/all`, { params: queryParams })
       .then((res) => {
         setRooms(res.data);
       })
