@@ -95,7 +95,7 @@ const RoomsContainer = () => {
 
 
 
-      <div className="grid grid-cols-4 gap-y-[3rem] pb-[2rem] gap-x-3">
+      <div className="flex flex-wrap justify-center md:grid md:grid-cols-4 gap-y-[3rem] pb-[2rem] gap-x-3">
         {rooms?.map((room: RoomType) => (
           <RoomItem room_number={room.room_number} room_name={room.room_name} price={room.price} room_type={room.room_type} status={room.status} />
         ))}
